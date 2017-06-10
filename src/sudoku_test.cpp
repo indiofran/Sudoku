@@ -155,6 +155,7 @@ TEST(SudokuTests, cantOperaciones){
 	bool resolver0= sudoku_resolver(t, nroOperaciones);
 	ASSERT_EQ(true, resolver0);
 	ASSERT_LT(0, nroOperaciones);
+	nroOperaciones = 0;
 	bool resolver1= sudoku_resolver(t, nroOperaciones);
 	ASSERT_EQ(true, resolver1);
 	ASSERT_EQ(0, nroOperaciones);
