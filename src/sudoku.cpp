@@ -60,8 +60,8 @@ int sudoku_primerCeldaVaciaFila(Tablero t) {
             f++;
         }
 
-        return result;
-    }
+       }
+    return result;
 }
 
 int sudoku_primerCeldaVaciaColumna(Tablero t) {
@@ -75,8 +75,8 @@ int sudoku_primerCeldaVaciaColumna(Tablero t) {
             c++;
         }
 
-        return result;
-    }
+     }
+    return result;
 }
 
 int sudoku_valorEnCelda(Tablero t, int f, int c) {
@@ -101,11 +101,11 @@ bool sudoku_esTableroValido(Tablero t) {
 }
 
 bool sudoku_esTableroParcialmenteResuelto(Tablero t) {
-    return (sudoku_esTableroValido(t) && filasOK(t) && columnasOK(t) && regionOk(t));
+	return (sudoku_esTableroValido(t) && filasOk(t) && columnasOk(t) && regionesOk(t));
 }
 
 bool sudoku_esTableroTotalmenteResuelto(Tablero t) {
-	return sudoku_nroDeCeldasVacias(t) == 0 && sudoku_esTableroParcialmenteResuelto(t);
+	return (sudoku_nroDeCeldasVacias(t) == 0 && sudoku_esTableroParcialmenteResuelto(t));
 }
 
 bool sudoku_esSubTablero(Tablero t0, Tablero t1) {
@@ -121,120 +121,169 @@ bool sudoku_esSubTablero(Tablero t0, Tablero t1) {
 }
 
 bool sudoku_resolver(Tablero t) {
-	// COMPLETAR
-	return false;
+	bool result = false;
+	if(sudoku_esTableroTotalmenteResuelto(t))
+	{
+		result = true;
+	}else if(sudoku_esTableroParcialmenteResuelto(t)){
+
+		int f = sudoku_primerCeldaVaciaFila(t);
+		int c = sudoku_primerCeldaVaciaColumna(t);
+		int i = 1;
+		while(i <= 9 && !result){
+			sudoku_llenarCelda(t,f,c,i);
+			if(sudoku_resolver(t))
+			{
+				result = true;
+			}else{
+				sudoku_vaciarCelda(t,f,c);
+			}
+			i++;
+		}
+	}
+	return result;
 }
 
 bool sudoku_resolver(Tablero t, int& count) {
-	// COMPLETAR
-	return false;
+	bool result = false;
+	if(sudoku_esTableroTotalmenteResuelto(t))
+	{
+		result = true;
+	}else if(sudoku_esTableroParcialmenteResuelto(t)){
+		int f = sudoku_primerCeldaVaciaFila(t);
+		int c = sudoku_primerCeldaVaciaColumna(t);
+		int i = 1;
+		while(i <= 9 && !result){
+			sudoku_llenarCelda(t,f,c,i);
+			count++;
+			if(sudoku_resolver(t))
+			{
+				result = true;
+			}else{
+				sudoku_vaciarCelda(t,f,c);
+				count++;
+
+			}
+			i++;
+		}
+	}
+	return result;
 }
+
 
 
 
 /**
- *  Funciones Auziliares ParcialmenteResuleto
+ * Funciones Auxiliares de Tablero Parcialmente Resuelto.
  */
-bool filasOK(Tablero t){
-	bool res = true;
-		int f = 0;
-		int c;
-		while(indiceValido(f)){
-			c = 0;
-			while(indiceValido(c)){
-				if (cantidadEnFila(t,f,t[f][c]) != 1 && t[f][c] != 0){
-					res = false;
-				}
-				c++;
-			}
-			f++;
-		}
-		return res;
-}
-int cantidadEnFila(Tablero t, int f, int v){
+int cantEnFila(Tablero t, int f, int v){
 	int cantidad = 0;
-		int c = 0;
-		while(indiceValido(c)){
-			if(t[f][c] == v){
-				cantidad++;
-			}
-			c++;
+	int c = 0;
+	while(indiceValido(c)){
+		if(t[f][c] == v){
+			cantidad++;
 		}
-		return cantidad;
-}
-bool columnasOK(Tablero t){
-	bool res = true;
-		int f = 0;
-		int c;
-		while(indiceValido(f)){
-			c = 0;
-			while(indiceValido(c)){
-				if (cantidadEnColumna(t,f,t[f][c]) != 1 && t[f][c] != 0){
-					res = false;
-				}
-				c++;
-			}
-			f++;
-		}
-		return res;
-}
-int cantidadEnColumna(Tablero t, int f, int v){
-	int cantidad = 0;
-		int c = 0;
-		while(indiceValido(c)){
-			if(t[f][c] == v){
-				cantidad++;
-			}
-			c++;
-		}
-		return cantidad;
-}
-bool regionOk(Tablero t){
-    int f =0;
-    int c;
-    bool result = true;
-    while(f < 3){
-        c = 0;
-        while (c < 3){
-            if(!regionValida(t,f,c)){
-                result = false;
-            }
-            c++;
-        }
-        f++;
-    }
-    return result;
-}
-bool regionValida(Tablero t, int x, int y){
-    int f = 1;
-    int c;
-    bool result = true;
-    while (f <= 3){
-        c = 1;
-        while(c <= 3){
-            if(cantidadEnRegion(t, x, y, t[3*x+f][3*y+c]) != 1 && t[3*x+f][3*y+c] != 0){
-                result = false;
-            }
-        }
-    }
-    return result;
-}
-int cantidadEnRegion(Tablero t, int x, int y, int value){
-    int f = 1;
-    int c;
-    int cantEnColumna = 0;
-    while(f <= 3){
-        c = 1;
-        while (c <= 3) {
-            if (t[3*x+f][3*y+c] == value) {
-                cantEnColumna++;
-            }
-            c++;
-        }
-    }
-    return cantEnColumna;
+		c++;
+	}
+	return cantidad;
 }
 
+bool filasOk(Tablero t){
+	bool res = true;
+	int f = 0;
+	int c;
+	while(indiceValido(f)){
+		c = 0;
+		while(indiceValido(c) && res){
+			if (cantEnFila(t,f,t[f][c]) != 1 && t[f][c] != 0){
+				res = false;
+			}
+			c++;
+		}
+		f++;
+	}
+	return res;
+}
+
+int cantEnColumna(Tablero t, int c, int v){
+	int cantidad = 0;
+		int f = 0;
+		while(indiceValido(f)){
+			if(t[f][c] == v){
+				cantidad++;
+			}
+			f++;
+		}
+		return cantidad;
+}
+
+bool columnasOk(Tablero t){
+	bool res = true;
+	int f = 0;
+	int c;
+	while(indiceValido(f)){
+		c = 0;
+		while(indiceValido(c) && res){
+			if (cantEnColumna(t,c,t[f][c]) != 1 && t[f][c] != 0){
+				res = false;
+			}
+			c++;
+		}
+		f++;
+	}
+	return res;
+}
+
+int cantEnRegion(Tablero t, int x, int y, int v){
+	int cantidad = 0;
+	int f = 0;
+	int c;
+	while(f < 3){
+		c = 0;
+		while(c < 3){
+			if(t[(x*3) + f][(y*3) + c] == v){
+				cantidad++;
+			}
+			c++;
+		}
+		f++;
+	}
+	return cantidad;
+}
+
+bool regionValida(Tablero t, int x, int y){
+	bool res = true;
+	int f = 0;
+	int c;
+	while(f < 3){
+		c = 0;
+		while(c < 3 && res){
+			if(cantEnRegion(t,x,y,t[(x*3) + f][(y*3) + c]) != 1 && t[(x*3) + f][(y*3) + c] != 0){
+				res = false;
+			}
+			c++;
+		}
+		f++;
+	}
+	return res;
+}
+
+bool regionesOk(Tablero t){
+	bool res = true;
+	int x = 0;
+	int y;
+	while(x < 3){
+		y = 0;
+		while(y < 3 && res){
+			if(!regionValida(t,x,y)){
+				res = false;
+			}
+			y++;
+		}
+		x++;
+	}
+	return res;
+}
 
 
 /**

@@ -102,8 +102,8 @@ void sudoku_print(Tablero t);
 /**
  * Funciones Aux
  */
-int cantidadEnFila(Tablero t, int f, int value);
-bool filasOK(Tablero t);
+int cantEnFila(Tablero t, int f, int value);
+bool filasOk(Tablero t);
 bool esFilaDePrimeraCeldaVacia(Tablero t, int f);
 bool hayCeldaVacia(Tablero t, int f);
 bool noHayCeldaVaciaAntes(Tablero t, int f);
@@ -111,11 +111,11 @@ bool esColumnaDePrimeraCeldaVacia(Tablero t, int c);
 bool esPrimeraCeldaVaciaDeFila(Tablero t, int f, int c);
 bool indiceValido (int i);
 bool posicionValida (int f, int c);
-int cantidadEnColumna(Tablero t, int c, int v);
-bool columnasOK(Tablero t);
-int cantidadEnRegion(Tablero t, int x, int y, int value);
+int cantEnColumna(Tablero t, int c, int v);
+bool columnasOk(Tablero t);
+int cantEnRegion(Tablero t, int x, int y, int value);
 bool regionValida(Tablero t, int x, int y);
-bool regionOk(Tablero t);
+bool regionesOk(Tablero t);
 bool esCeldaLlena(Tablero t,int f,int c,int v);
 bool posicionesValidas(Tablero t);
 
