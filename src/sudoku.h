@@ -118,5 +118,6 @@ bool regionValida(Tablero t, int x, int y);
 bool regionesOk(Tablero t);
 bool esCeldaLlena(Tablero t,int f,int c,int v);
 bool posicionesValidas(Tablero t);
+bool esNroPosible(Tablero t, int f, int c, int v);
 
 #endif /* SUDOKU_H_ */
