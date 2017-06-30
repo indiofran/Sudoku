@@ -91,9 +91,7 @@ void sudoku_llenarCelda(Tablero t, int f, int c, int v) {
 }
 
 void sudoku_vaciarCelda(Tablero t, int f, int c) {
-	if (posicionValida(f,c) && !sudoku_esCeldaVacia(t,f,c)){
-		t[f][c] = 0;
-	}
+      t[f][c] = 0;
 }
 
 bool sudoku_esTableroValido(Tablero t) {
