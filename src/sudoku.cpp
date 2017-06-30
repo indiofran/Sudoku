@@ -84,10 +84,7 @@ int sudoku_valorEnCelda(Tablero t, int f, int c) {
 }
 
 void sudoku_llenarCelda(Tablero t, int f, int c, int v) {
-    if (posicionValida(f,c) && !esCeldaLlena(t,f,c,v)){
-        t[f][c] = v;
-    }
-
+    t[f][c] = v;
 }
 
 void sudoku_vaciarCelda(Tablero t, int f, int c) {
