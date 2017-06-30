@@ -14,7 +14,7 @@ bool posicionValida (int f, int c){
 }
 
 bool sudoku_esCeldaVacia(Tablero t, int f, int c) {
-	return (posicionValida(f,c) && (t[f][c] == 0));
+	return (t[f][c] == 0);
 }
 
 void sudoku_vaciarTablero(Tablero t) {
