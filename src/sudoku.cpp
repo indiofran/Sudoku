@@ -49,39 +49,37 @@ int sudoku_nroDeCeldasVacias(Tablero t) {
 	return celdasVacias;
 }
 
+
 int sudoku_primerCeldaVaciaFila(Tablero t) {
-    int filaPrimerCeldaVacia;
-    int f = 0;
-    
-	while (f < 9) {
-		int c = 0;
-		while (c < 9) {
-			if (t[f][c] == 0) {
-				filaPrimerCeldaVacia = f;
-			}
-		c++;
-		}
-	f++;
-	}
-return filaPrimerCeldaVacia;
+    int result = -1;
+    if (sudoku_nroDeCeldasVacias(t) != 0) {
+        int f = 0;
+        while (indiceValido(f) && result == -1) {
+            if (esFilaDePrimeraCeldaVacia(t,f)) {
+                result = f;
+            }
+            f++;
+        }
+
+       }
+    return result;
 }
 
 int sudoku_primerCeldaVaciaColumna(Tablero t) {
-	 int columnaPrimerCeldaVacia;
-	 int f = 0;
-	 
-   while (f < 9) {
-	   int c = 0;
-	   while (c < 9) {
-		   if (t[f][c] == 0) {
-			  columnaPrimerCeldaVacia = c;
-		   }
-	   c++;
-	   }
-  f++;
-  }
-return columnaPrimerCeldaVacia;
+    int result = -1;
+    if (sudoku_nroDeCeldasVacias(t) != 0) {
+        int c = 0;
+        while (indiceValido(c) && result == -1) {
+            if (esColumnaDePrimeraCeldaVacia(t,c)) {
+                result = c;
+            }
+            c++;
+        }
+
+     }
+    return result;
 }
+
 
 int sudoku_valorEnCelda(Tablero t, int f, int c) {
 	return t[f][c];
