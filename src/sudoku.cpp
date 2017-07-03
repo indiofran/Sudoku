@@ -138,9 +138,10 @@ bool sudoku_resolver(Tablero t, int& count) {
 			}
 			i++;
 		}
-	}
 	return result;
 }
+	
+
 
 
 
@@ -362,5 +363,5 @@ bool posicionesValidas(Tablero t){
     return result;
 }
 
-}
+
 
