@@ -115,31 +115,6 @@ bool sudoku_esSubTablero(Tablero t0, Tablero t1) {
 	return res;
 }
 
-bool sudoku_resolver(Tablero t) {
-	bool result = false;
-	if(sudoku_esTableroTotalmenteResuelto(t))
-	{
-		result = true;
-	}else if(sudoku_esTableroParcialmenteResuelto(t)){
-
-		int f = sudoku_primerCeldaVaciaFila(t);
-		int c = sudoku_primerCeldaVaciaColumna(t);
-		int i = 1;
-		while(i <= 9 && !result){
-			if(esNroPosible(t,f,c,i){
-				sudoku_llenarCelda(t,f,c,i);
-				if(sudoku_resolver(t))
-				{
-					result = true;
-				}else{
-					sudoku_vaciarCelda(t,f,c);
-				}	
-			}
-			i++;
-		}
-	}
-	return result;
-}
 
 bool sudoku_resolver(Tablero t, int& count) {
 	bool result = false;
@@ -151,7 +126,6 @@ bool sudoku_resolver(Tablero t, int& count) {
 		int c = sudoku_primerCeldaVaciaColumna(t);
 		int i = 1;
 		while(i <= 9 && !result){
-			if(esNroPosible(t,f,c,i){
 				sudoku_llenarCelda(t,f,c,i);
 				count++;
 				if(sudoku_resolver(t,count))
@@ -386,11 +360,7 @@ bool posicionesValidas(Tablero t){
         f++;
     }
     return result;
+}
 
 }
-/**
- * Auxiliar resolver tablero
- */
-bool esNroPosible(Tablero t, int f, int c, int v){
-	return cantEnFila(t,f,v) == 0 && cantEncolumna(t,c,v) == 0 && cantEnRegion (t,f,c,v) == 0;
-}	
+
