@@ -58,7 +58,6 @@ int sudoku_primerCeldaVaciaFila(Tablero t) {
 			while (c < 9) {
 				if (t[f][c] == 0) {
 					filaPrimerCeldaVacia = f;
-					columnaPrimerCeldaVacia = c;
 				}
 			c++;
 			}
