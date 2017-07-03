@@ -23,13 +23,11 @@ void sudoku_vaciarTablero(Tablero t) {
 	while(f<9){
 		c = 0;
 		while(c<9){
-			if(!sudoku_esCeldaVacia(t,f,c)) {
-				t[f][c] = 0;
-			}
-			c++;
+	        	t[f][c] = 0;
 		}
-		f++;
+	        c++;
 	}
+	f++;
 }
 
 int sudoku_nroDeCeldasVacias(Tablero t) {
