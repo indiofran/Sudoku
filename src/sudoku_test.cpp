@@ -117,6 +117,17 @@ TEST(SudokuTests, vaciarCelda) {
 	ASSERT_EQ(true, esCeldaVacia2);
 }
 
+TEST(SudokuTests, tableroNoTotalmenteResuelto) {
+Tablero t;
+sudoku_vaciarTablero(t);
+bool tablero_valido = sudoku_esTableroValido(t);
+ASSERT_EQ(true, tablero_valido);
+bool tablero_parc_resuelto = sudoku_esTableroParcialmenteResuelto(t);
+ASSERT_EQ(true, tablero_parc_resuelto);
+bool tablero_tot_resuelto = sudoku_esTableroTotalmenteResuelto(t);
+ASSERT_EQ(false, tablero_tot_resuelto);
+}
+
 
 TEST(SudokuTests, tableroInvalido) {
 	Tablero t;
