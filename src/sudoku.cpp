@@ -134,11 +134,11 @@ bool sudoku_resolver(Tablero t, int& count) {
 				}else{
 					sudoku_vaciarCelda(t,f,c);
 					count++;
-				}	
-			}
-			i++;
-		}
-	return result;
+	       }
+	   i++;
+	}
+     }
+return result;
 }
 	
 
