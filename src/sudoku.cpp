@@ -52,8 +52,9 @@ int sudoku_nroDeCeldasVacias(Tablero t) {
 int sudoku_primerCeldaVaciaFila(Tablero t) {
     int filaPrimerCeldaVacia;
     int f = 0;
-    int c = 0;
+    
 	while (f < 9) {
+		int c = 0;
 		while (c < 9) {
 			if (t[f][c] == 0) {
 				filaPrimerCeldaVacia = f;
@@ -68,8 +69,9 @@ return filaPrimerCeldaVacia;
 int sudoku_primerCeldaVaciaColumna(Tablero t) {
 	 int columnaPrimerCeldaVacia;
 	 int f = 0;
-	 int c = 0;
+	 
    while (f < 9) {
+	   int c = 0;
 	   while (c < 9) {
 		   if (t[f][c] == 0) {
 			  columnaPrimerCeldaVacia = c;
