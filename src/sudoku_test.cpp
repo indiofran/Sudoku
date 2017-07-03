@@ -82,7 +82,7 @@ TEST(SudokuTests, llenarCeldaNoVacia) {
 TEST(SudokuTests, resolverTableroVacio) {
 	Tablero t;
 	sudoku_vaciarTablero(t);
-	bool resolver_rv = sudoku_resolver(t);
+	bool resolver_rv = sudoku_resolver(t, count);
 	ASSERT_EQ(true,resolver_rv);
 	bool totalmente_resuelto_rv = sudoku_esTableroTotalmenteResuelto(t);
 	ASSERT_EQ(true,totalmente_resuelto_rv);
@@ -91,7 +91,7 @@ TEST(SudokuTests, resolverTableroVacio) {
 TEST(SudokuTests, tableroSinCeldasVacias) {
 	Tablero t;
 	sudoku_vaciarTablero(t);
-	bool resolver_rv = sudoku_resolver(t);
+	bool resolver_rv = sudoku_resolver(t, count);
 	ASSERT_EQ(true, resolver_rv);
 	int celdas_vacias_rv = sudoku_nroDeCeldasVacias(t);
 	ASSERT_EQ(0, celdas_vacias_rv);
