@@ -5,13 +5,6 @@ using namespace std;
 
 
 
-bool indiceValido (int i){
-		return (0 <= i && i < 9);
-}
-bool posicionValida (int f, int c){
-		return (indiceValido(f) && indiceValido(c));
-
-}
 
 bool sudoku_esCeldaVacia(Tablero t, int f, int c) {
 	return (t[f][c] == 0);
@@ -54,7 +47,7 @@ int sudoku_primerCeldaVaciaFila(Tablero t) {
     int result = -1;
     if (sudoku_nroDeCeldasVacias(t) != 0) {
         int f = 0;
-        while (indiceValido(f) && result == -1) {
+        while (f<9 && result == -1) {
             if (esFilaDePrimeraCeldaVacia(t,f)) {
                 result = f;
             }
@@ -69,7 +62,7 @@ int sudoku_primerCeldaVaciaColumna(Tablero t) {
     int result = -1;
     if (sudoku_nroDeCeldasVacias(t) != 0) {
         int c = 0;
-        while (indiceValido(c) && result == -1) {
+        while (c<9 && result == -1) {
             if (esColumnaDePrimeraCeldaVacia(t,c)) {
                 result = c;
             }
@@ -94,7 +87,20 @@ void sudoku_vaciarCelda(Tablero t, int f, int c) {
 }
 
 bool sudoku_esTableroValido(Tablero t) {
-	return posicionesValidas(t);
+	   int f = 0;
+	    int c;
+	    bool result = true;
+	    while (f<9){
+	        c = 0;
+	        while (c<9){
+	          if(0 > t[f][c] || t[f][c] > 9){
+	             result = false;
+	          }
+	            c++;
+	        }
+	        f++;
+	    }
+	    return result;
 }
 
 bool sudoku_esTableroParcialmenteResuelto(Tablero t) {
@@ -154,7 +160,7 @@ return result;
 int cantEnFila(Tablero t, int f, int v){
 	int cantidad = 0;
 	int c = 0;
-	while(indiceValido(c)){
+	while(c<9){
 		if(t[f][c] == v){
 			cantidad++;
 		}
@@ -167,9 +173,9 @@ bool filasOk(Tablero t){
 	bool res = true;
 	int f = 0;
 	int c;
-	while(indiceValido(f)){
+	while(f<9){
 		c = 0;
-		while(indiceValido(c) && res){
+		while(c<9 && res){
 			if (cantEnFila(t,f,t[f][c]) != 1 && t[f][c] != 0){
 				res = false;
 			}
@@ -183,7 +189,7 @@ bool filasOk(Tablero t){
 int cantEnColumna(Tablero t, int c, int v){
 	int cantidad = 0;
 		int f = 0;
-		while(indiceValido(f)){
+		while(f<9){
 			if(t[f][c] == v){
 				cantidad++;
 			}
@@ -196,9 +202,9 @@ bool columnasOk(Tablero t){
 	bool res = true;
 	int f = 0;
 	int c;
-	while(indiceValido(f)){
+	while(f<9){
 		c = 0;
-		while(indiceValido(c) && res){
+		while(c<9 && res){
 			if (cantEnColumna(t,c,t[f][c]) != 1 && t[f][c] != 0){
 				res = false;
 			}
@@ -265,12 +271,12 @@ bool regionesOk(Tablero t){
  * Funciones Auxiliares de sudoku_primerCeldaVaciaFila
  */
 bool esFilaDePrimeraCeldaVacia(Tablero t, int f){
-    return (indiceValido(f) && hayCeldaVacia(t,f) && noHayCeldaVaciaAntes(t,f));
+    return (hayCeldaVacia(t,f) && noHayCeldaVaciaAntes(t,f));
 }
 bool hayCeldaVacia(Tablero t, int f){
     int c = 0;
     bool result = false;
-    while(indiceValido(c) && !result){
+    while(c<9 && !result){
         if(sudoku_esCeldaVacia(t,f,c)){
             result = true;
         }
@@ -297,7 +303,7 @@ bool noHayCeldaVaciaAntes(Tablero t, int f){
 bool esColumnaDePrimeraCeldaVacia(Tablero t, int c){
     int f = 0;
     bool result = false;
-    while(indiceValido(f) && !result){
+    while(f<9 && !result){
         if(hayCeldaVacia(t,f) && noHayCeldaVaciaAntes(t,f) && sudoku_esCeldaVacia(t,f,c) && esPrimeraCeldaVaciaDeFila(t,f,c)){
             result = true;
         }
@@ -345,25 +351,7 @@ void sudoku_print(Tablero t) {
 bool esCeldaLlena(Tablero t,int f,int c,int v){
     return  t[f][c] == v;
 }
-/**
- * Auxiliar Tablero Valido
- */
-bool posicionesValidas(Tablero t){
-    int f = 0;
-    int c;
-    bool result = true;
-    while (indiceValido(f)){
-        c = 0;
-        while (indiceValido(c)){
-          if(0 > t[f][c] || t[f][c] > 9){
-             result = false;
-          }
-            c++;
-        }
-        f++;
-    }
-    return result;
-}
+
 
 
 
