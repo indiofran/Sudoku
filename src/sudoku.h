@@ -104,20 +104,13 @@ void sudoku_print(Tablero t);
  */
 int cantEnFila(Tablero t, int f, int value);
 bool filasOk(Tablero t);
-bool esFilaDePrimeraCeldaVacia(Tablero t, int f);
-bool hayCeldaVacia(Tablero t, int f);
-bool noHayCeldaVaciaAntes(Tablero t, int f);
-bool esColumnaDePrimeraCeldaVacia(Tablero t, int c);
-bool esPrimeraCeldaVaciaDeFila(Tablero t, int f, int c);
-bool indiceValido (int i);
-bool posicionValida (int f, int c);
+std::pair<int,int> primerCeldaVacia(Tablero t);
 int cantEnColumna(Tablero t, int c, int v);
 bool columnasOk(Tablero t);
 int cantEnRegion(Tablero t, int x, int y, int value);
 bool regionValida(Tablero t, int x, int y);
 bool regionesOk(Tablero t);
 bool esCeldaLlena(Tablero t,int f,int c,int v);
-bool posicionesValidas(Tablero t);
 
 
 #endif /* SUDOKU_H_ */
