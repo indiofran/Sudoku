@@ -74,7 +74,6 @@ TEST(SudokuTests, llenarCeldaNoVacia) {
 	Tablero t;
 	sudoku_vaciarTablero(t);
 	sudoku_llenarCelda(t,4,4,5);
-	sudoku_vaciarCelda(t,4,4);
 	sudoku_llenarCelda(t,4,4,7);
 	int rv = sudoku_valorEnCelda(t,4,4);
 	ASSERT_EQ(7,rv);
@@ -83,8 +82,7 @@ TEST(SudokuTests, llenarCeldaNoVacia) {
 TEST(SudokuTests, resolverTableroVacio) {
 	Tablero t;
 	sudoku_vaciarTablero(t);
-	int count;
-	bool resolver_rv = sudoku_resolver(t, count);
+	bool resolver_rv = sudoku_resolver(t);
 	ASSERT_EQ(true,resolver_rv);
 	bool totalmente_resuelto_rv = sudoku_esTableroTotalmenteResuelto(t);
 	ASSERT_EQ(true,totalmente_resuelto_rv);
@@ -93,8 +91,7 @@ TEST(SudokuTests, resolverTableroVacio) {
 TEST(SudokuTests, tableroSinCeldasVacias) {
 	Tablero t;
 	sudoku_vaciarTablero(t);
-	int count;
-	bool resolver_rv = sudoku_resolver(t, count);
+	bool resolver_rv = sudoku_resolver(t);
 	ASSERT_EQ(true, resolver_rv);
 	int celdas_vacias_rv = sudoku_nroDeCeldasVacias(t);
 	ASSERT_EQ(0, celdas_vacias_rv);
@@ -118,16 +115,15 @@ TEST(SudokuTests, vaciarCelda) {
 }
 
 TEST(SudokuTests, tableroNoTotalmenteResuelto) {
-Tablero t;
-sudoku_vaciarTablero(t);
-bool tablero_valido = sudoku_esTableroValido(t);
-ASSERT_EQ(true, tablero_valido);
-bool tablero_parc_resuelto = sudoku_esTableroParcialmenteResuelto(t);
-ASSERT_EQ(true, tablero_parc_resuelto);
-bool tablero_tot_resuelto = sudoku_esTableroTotalmenteResuelto(t);
-ASSERT_EQ(false, tablero_tot_resuelto);
+	Tablero t;
+	sudoku_vaciarTablero(t);
+	bool tablero_valido = sudoku_esTableroValido(t);
+	ASSERT_EQ(true, tablero_valido);
+	bool tablero_parc_resuelto = sudoku_esTableroParcialmenteResuelto(t);
+	ASSERT_EQ(true, tablero_parc_resuelto);
+	bool tablero_tot_resuelto = sudoku_esTableroTotalmenteResuelto(t);
+	ASSERT_EQ(false, tablero_tot_resuelto);
 }
-
 
 TEST(SudokuTests, tableroInvalido) {
 	Tablero t;
